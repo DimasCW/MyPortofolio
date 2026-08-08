@@ -14,6 +14,7 @@ function LanyardScene({ prefersReducedMotion }: { prefersReducedMotion: boolean 
   const cardRef = useRef<any>(null);
   const cardVisualRef = useRef<any>(null);
   const ropeRef = useRef<any>(null);
+  const htmlGroupRef = useRef<THREE.Group>(null);
 
   const [isDragging, setIsDragging] = useState(false);
   const [flipped, setFlipped] = useState(false);
@@ -127,12 +128,14 @@ function LanyardScene({ prefersReducedMotion }: { prefersReducedMotion: boolean 
     flipRot.current = THREE.MathUtils.lerp(flipRot.current, targetY, 8 * timeDelta);
     if (cardVisualRef.current) {
       cardVisualRef.current.rotation.y = flipRot.current;
-      
-      // Force normalize scale to prevent matrix float drift from shrinking the HTML card
-      cardVisualRef.current.scale.set(1, 1, 1);
-      if (cardVisualRef.current.parent) {
-        cardVisualRef.current.parent.scale.set(1, 1, 1);
-      }
+    }
+
+    // Set sibling visual group to follow physics body exactly (bypasses Rapier scaling drift)
+    if (htmlGroupRef.current && cardRef.current) {
+      const pos = cardRef.current.translation();
+      const rot = cardRef.current.rotation();
+      htmlGroupRef.current.position.set(pos.x, pos.y, pos.z);
+      htmlGroupRef.current.quaternion.set(rot.x, rot.y, rot.z, rot.w);
     }
 
     // Render elastic Bezier lanyard strap
@@ -175,7 +178,7 @@ function LanyardScene({ prefersReducedMotion }: { prefersReducedMotion: boolean 
         </mesh>
       </RigidBody>
 
-      {/* 2. Physics-Simulated ID Card */}
+      {/* 2. Physics-Simulated ID Card (Physics and Colliders Only) */}
       <RigidBody 
         ref={cardRef} 
         type="dynamic" 
@@ -184,6 +187,14 @@ function LanyardScene({ prefersReducedMotion }: { prefersReducedMotion: boolean 
         angularDamping={3.0} // Increased damping to quickly settle back to front-facing position
         colliders="cuboid"
       >
+        {/* Invisible dummy mesh to define physics collider shape */}
+        <mesh visible={false}>
+          <boxGeometry args={[1.9, 2.85, 0.04]} />
+        </mesh>
+      </RigidBody>
+
+      {/* Sibling Visual Group (bypasses Rapier matrix scaling drift) */}
+      <group ref={htmlGroupRef}>
         {/* Card Visual Mesh & HTML overlay */}
         <group ref={cardVisualRef}>
           {/* Card Backing Mesh */}
@@ -323,7 +334,7 @@ function LanyardScene({ prefersReducedMotion }: { prefersReducedMotion: boolean 
             <meshBasicMaterial transparent opacity={0} depthWrite={false} />
           </mesh>
         </group>
-      </RigidBody>
+      </group>
 
       {/* 3. Dynamic Strap Ribbon */}
       <Line 
