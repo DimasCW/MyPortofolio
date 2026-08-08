@@ -128,14 +128,27 @@ function LanyardScene({ prefersReducedMotion }: { prefersReducedMotion: boolean 
     flipRot.current = THREE.MathUtils.lerp(flipRot.current, targetY, 8 * timeDelta);
     if (cardVisualRef.current) {
       cardVisualRef.current.rotation.y = flipRot.current;
+      cardVisualRef.current.scale.set(1, 1, 1);
     }
 
     // Set sibling visual group to follow physics body exactly (bypasses Rapier scaling drift)
     if (htmlGroupRef.current && cardRef.current) {
       const pos = cardRef.current.translation();
       const rot = cardRef.current.rotation();
+      
+      // Copy translation
       htmlGroupRef.current.position.set(pos.x, pos.y, pos.z);
-      htmlGroupRef.current.quaternion.set(rot.x, rot.y, rot.z, rot.w);
+      
+      // Copy normalized quaternion to prevent floating-point matrix scaling drift
+      const q = new THREE.Quaternion(rot.x, rot.y, rot.z, rot.w).normalize();
+      htmlGroupRef.current.quaternion.copy(q);
+      
+      // Lock scales to exactly 1.0
+      htmlGroupRef.current.scale.set(1, 1, 1);
+      
+      // Force update Three.js matrices immediately so Drei's <Html> reads clean values
+      htmlGroupRef.current.updateMatrix();
+      htmlGroupRef.current.updateMatrixWorld(true);
     }
 
     // Render elastic Bezier lanyard strap
