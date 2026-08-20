@@ -7,24 +7,15 @@ export default function About() {
     <section id="about" className="py-24 px-6 bg-primary-warm border-b border-divider">
       <div className="mx-auto max-w-6xl grid grid-cols-1 lg:grid-cols-12 gap-8">
         
-        {/* Left Column - Section Label & Photo */}
-        <div className="lg:col-span-4 flex flex-col items-start gap-6">
+        {/* Left Column - Section Label */}
+        <div className="lg:col-span-4 flex flex-col items-start">
           <ScrollReveal delay={100}>
             <span className="font-mono text-[9px] uppercase tracking-widest text-forest-green font-semibold mb-2 block">
               01 // Profil
             </span>
-            <h2 className="font-serif text-3xl font-light tracking-tight text-primary-dark mb-6">
+            <h2 className="font-serif text-3xl font-light tracking-tight text-primary-dark">
               Tentang Dimas
             </h2>
-            
-            {/* Profile Photo Frame */}
-            <div className="relative w-full max-w-[280px] aspect-[2/3] border border-divider/60 rounded-xs bg-[#E4E4E0]/20 overflow-hidden shadow-xs">
-              <img
-                src="/dimas-profile-v3.jpg"
-                alt="Foto Profil Dimas Chandra Winata"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 hover:scale-[1.02]"
-              />
-            </div>
           </ScrollReveal>
         </div>
 
