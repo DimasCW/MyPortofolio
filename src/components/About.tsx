@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import { portfolioData } from "../data/portfolioData";
 import ScrollReveal from "./ScrollReveal";
 
@@ -20,13 +19,10 @@ export default function About() {
             
             {/* Profile Photo Frame */}
             <div className="relative w-full max-w-[280px] aspect-[2/3] border border-divider/60 rounded-xs bg-[#E4E4E0]/20 overflow-hidden shadow-xs">
-              <Image
-                src="/dimas-profile.jpg"
+              <img
+                src="/dimas-profile-v3.jpg"
                 alt="Foto Profil Dimas Chandra Winata"
-                fill
-                sizes="(max-w-768px) 100vw, 300px"
-                className="object-cover transition-transform duration-500 hover:scale-[1.02]"
-                priority
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 hover:scale-[1.02]"
               />
             </div>
           </ScrollReveal>

@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import { portfolioData } from "../data/portfolioData";
 import ScrollReveal from "./ScrollReveal";
 
@@ -40,13 +39,10 @@ export default function Hero() {
           {/* Mobile Profile Photo (Inline, only visible on mobile/tablet) */}
           <ScrollReveal delay={250} className="w-full lg:hidden flex justify-center my-2">
             <div className="relative w-full max-w-[280px] aspect-[2/3] overflow-hidden rounded-xs border border-divider/60 bg-[#E4E4E0]/10 shadow-xs">
-              <Image
-                src="/dimas-profile.jpg"
+              <img
+                src="/dimas-profile-v3.jpg"
                 alt="Foto Profil Dimas Chandra Winata"
-                fill
-                priority
-                unoptimized
-                className="object-cover object-center"
+                className="absolute inset-0 w-full h-full object-cover object-center"
               />
             </div>
           </ScrollReveal>
@@ -85,18 +81,15 @@ export default function Hero() {
 
       </div>
 
-      {/* Absolute Full Height Profile Photo (Desktop only, starts slightly under the navbar) */}
-      <div className="absolute right-0 top-4 bottom-0 w-full lg:w-[45%] overflow-hidden pointer-events-none select-none z-0 lg:block hidden">
+      {/* Absolute Full Height Profile Photo (Desktop only, starts from top-0 for full-bleed and uses native img for pixel-perfect sharpness) */}
+      <div className="absolute right-0 top-0 bottom-0 w-full lg:w-[45%] overflow-hidden pointer-events-none select-none z-0 lg:block hidden">
         {/* Blur & Color-Fade Overlay on the left side */}
         <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-32 lg:w-40 bg-gradient-to-r from-primary-warm via-primary-warm/80 to-transparent backdrop-blur-[3px] z-10" />
         
-        <Image
-          src="/dimas-profile.jpg"
+        <img
+          src="/dimas-profile-v3.jpg"
           alt="Foto Profil Dimas Chandra Winata"
-          fill
-          priority
-          unoptimized
-          className="object-cover object-top"
+          className="absolute inset-0 w-full h-full object-cover object-top"
           style={{
             maskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.02) 2%, rgba(0,0,0,0.2) 8%, rgba(0,0,0,0.9) 25%, black 100%)",
             WebkitMaskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.02) 2%, rgba(0,0,0,0.2) 8%, rgba(0,0,0,0.9) 25%, black 100%)",
