@@ -85,8 +85,8 @@ export default function Hero() {
 
       </div>
 
-      {/* Absolute Full Height Profile Photo (Desktop only, spans full height of section from border to border) */}
-      <div className="absolute right-0 top-0 bottom-0 w-full lg:w-[45%] h-full overflow-hidden pointer-events-none select-none z-0 lg:block hidden">
+      {/* Absolute Full Height Profile Photo (Desktop only, starts below the navbar) */}
+      <div className="absolute right-0 top-16 bottom-0 w-full lg:w-[45%] overflow-hidden pointer-events-none select-none z-0 lg:block hidden">
         {/* Blur & Color-Fade Overlay on the left side */}
         <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-32 lg:w-40 bg-gradient-to-r from-primary-warm via-primary-warm/80 to-transparent backdrop-blur-[3px] z-10" />
         
