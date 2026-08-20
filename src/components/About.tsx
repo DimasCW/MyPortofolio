@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { portfolioData } from "../data/portfolioData";
 import ScrollReveal from "./ScrollReveal";
 
@@ -7,15 +8,27 @@ export default function About() {
     <section id="about" className="py-24 px-6 bg-primary-warm border-b border-divider">
       <div className="mx-auto max-w-6xl grid grid-cols-1 lg:grid-cols-12 gap-8">
         
-        {/* Left Column - Section Label */}
-        <div className="lg:col-span-4 flex flex-col items-start">
+        {/* Left Column - Section Label & Photo */}
+        <div className="lg:col-span-4 flex flex-col items-start gap-6">
           <ScrollReveal delay={100}>
             <span className="font-mono text-[9px] uppercase tracking-widest text-forest-green font-semibold mb-2 block">
               01 // Profil
             </span>
-            <h2 className="font-serif text-3xl font-light tracking-tight text-primary-dark">
+            <h2 className="font-serif text-3xl font-light tracking-tight text-primary-dark mb-6">
               Tentang Dimas
             </h2>
+            
+            {/* Profile Photo Frame */}
+            <div className="relative w-full max-w-[280px] aspect-[2/3] border border-divider/60 rounded-xs bg-[#E4E4E0]/20 overflow-hidden shadow-xs">
+              <Image
+                src="/dimas-profile.jpg"
+                alt="Foto Profil Dimas Chandra Winata"
+                fill
+                sizes="(max-w-768px) 100vw, 300px"
+                className="object-cover transition-transform duration-500 hover:scale-[1.02]"
+                priority
+              />
+            </div>
           </ScrollReveal>
         </div>
 
