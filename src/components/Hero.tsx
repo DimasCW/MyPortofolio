@@ -96,7 +96,7 @@ export default function Hero() {
           fill
           priority
           unoptimized
-          className="object-cover object-center"
+          className="object-cover object-top"
           style={{
             maskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.02) 2%, rgba(0,0,0,0.2) 8%, rgba(0,0,0,0.9) 25%, black 100%)",
             WebkitMaskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.02) 2%, rgba(0,0,0,0.2) 8%, rgba(0,0,0,0.9) 25%, black 100%)",
